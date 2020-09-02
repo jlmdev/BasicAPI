@@ -15,11 +15,16 @@ namespace BasicAPI.Controllers
         //  past /api/dice that we want. In this case we trite {sides} to say take whatever the user
         // Provides after the last / parse it as an integer 
         [HttpGet("{sides}")]
-        public int Roll(int sides)
+        public List<int> Roll(int sides, int count)
         {
+            var rolls = new List<int>();
             var randomNumberGenerator = new Random();
-            var roll = randomNumberGenerator.Next(sides) + 1;
-            return roll;
+            for (var rollNumber = 0; rollNumber < count; rollNumber++)
+            {
+                var roll = randomNumberGenerator.Next(sides) + 1;
+                rolls.Add(roll);
+            }
+            return rolls;
         }
     }
 }
